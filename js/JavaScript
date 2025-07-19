@@ -1,0 +1,83 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // Lógica para destacar o link da página atual na navegação
+    const highlightActiveLink = () => {
+        const currentPath = window.location.pathname.split('/').pop();
+        const navLinks = document.querySelectorAll('.sidebar nav ul li a');
+
+        navLinks.forEach(link => {
+            const linkPath = link.getAttribute('href').split('/').pop();
+            if (linkPath === currentPath || (currentPath === '' && linkPath === 'index.html')) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    };
+
+    highlightActiveLink();
+
+    // Lógica do Menu Off-Canvas
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const siteWrapper = document.querySelector('.site-wrapper'); // O novo container
+
+    if (hamburgerBtn && sidebar && overlay && siteWrapper) {
+        const toggleMenu = () => {
+            sidebar.classList.toggle('is-active');
+            hamburgerBtn.classList.toggle('is-active'); // Anima o hambúrguer para um X
+            overlay.classList.toggle('is-active');
+            siteWrapper.classList.toggle('sidebar-open'); // Empurra o conteúdo
+            document.body.classList.toggle('no-scroll'); // Previne scroll no body quando menu aberto
+        };
+
+        hamburgerBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu); // Fecha o menu clicando no overlay
+
+        // Fecha o menu se um link for clicado (útil para navegação)
+        const navLinks = sidebar.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (sidebar.classList.contains('is-active')) {
+                    toggleMenu(); // Fecha o menu após clicar em um link
+                }
+            });
+        });
+    }
+
+    // Opcional: Adicionar animações de "aparecer ao rolar"
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated-fade-in-up');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Seleciona elementos para animar, excluindo o mobile-header que é sticky
+    document.querySelectorAll('.hero, .about-me, .learning-journey, .learning-item, .projeto-card, .curso-card').forEach(el => {
+        el.classList.add('animate-on-scroll');
+        observer.observe(el);
+    });
+
+    // CSS para as animações (já deve estar no seu style.css, mas reitero para referência)
+    /*
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .animated-fade-in-up {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    */
+});

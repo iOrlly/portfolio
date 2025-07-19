@@ -1,0 +1,543 @@
+/* --- Variáveis para cores --- */
+:root {
+    --cor-principal: #000000; /* Preto absoluto */
+    --cor-secundaria: #00C896; /* Verde Esmeralda */
+    --cor-texto-claro: #F0F0F0; /* Quase branco para o texto principal */
+    --cor-texto-escuro: #333333; /* Para texto em fundos claros, se houver */
+    --cor-borda: #1a1a1a; /* Um preto um pouco mais claro para destacar elementos */
+    --cor-card-fundo: #111111; /* Fundo para os cards, mais escuro que a borda */
+}
+
+/* Geral */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+    line-height: 1.6;
+    overflow-x: hidden; /* Evita scroll horizontal indesejado */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--cor-secundaria);
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+}
+
+/* --- Novo: Site Wrapper para Gerenciar Layout --- */
+.site-wrapper {
+    display: flex; /* Para posicionar sidebar e conteúdo lado a lado no desktop */
+    min-height: 100vh;
+    transition: transform 0.3s ease-in-out; /* Para animação de empurrar o conteúdo */
+}
+
+/* --- Sidebar (Menu Lateral Desktop) --- */
+.sidebar {
+    width: 280px;
+    background-color: var(--cor-borda);
+    padding: 30px 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed; /* Fixa no desktop */
+    height: 100%;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.sidebar .logo {
+    color: var(--cor-secundaria);
+    font-size: 2.2em;
+    font-weight: 700;
+    text-decoration: none;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 30px;
+}
+
+.sidebar nav ul li a {
+    color: var(--cor-texto-claro);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.3em;
+    padding: 12px 15px;
+    display: block;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    text-align: left;
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-principal);
+    transform: translateX(10px);
+}
+
+.sidebar-footer {
+    margin-top: 150%;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.sidebar-footer a {
+    color: var(--cor-texto-claro);
+    font-size: 1.1em;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.sidebar-footer a:hover {
+    color: var(--cor-secundaria);
+}
+
+/* --- Conteúdo Principal --- */
+.content {
+    margin-left: 280px; /* Margem para o conteúdo não ficar por baixo da sidebar no desktop */
+    flex-grow: 1;
+    padding: 60px 40px;
+    box-sizing: border-box;
+    transition: margin-left 0.3s ease-in-out; /* Para animação de empurrar o conteúdo */
+}
+
+/* --- Novo: Mobile Header (Visível apenas em Mobile) --- */
+.mobile-header {
+    display: none; /* Escondido por padrão no desktop */
+    background-color: var(--cor-borda);
+    padding: 15px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: sticky; /* Fixa o cabeçalho no topo ao rolar */
+    top: 0;
+    z-index: 999; /* Fica acima do conteúdo */
+}
+
+.mobile-header .page-title {
+    margin: 0;
+    font-size: 1.8em;
+    color: var(--cor-secundaria);
+}
+
+/* --- Novo: Hamburger Menu Icon --- */
+.hamburger-menu {
+    display: block; /* Visível apenas em mobile */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 22px;
+    position: relative;
+    z-index: 1001; /* Fica acima do overlay */
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--cor-secundaria);
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+    left: 0;
+}
+
+.hamburger-menu span:nth-child(1) { top: 0; }
+.hamburger-menu span:nth-child(2) { top: 9px; }
+.hamburger-menu span:nth-child(3) { top: 18px; }
+
+/* Animação do hambúrguer para X */
+.hamburger-menu.is-active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger-menu.is-active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-menu.is-active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* --- Novo: Overlay --- */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Escurece o fundo */
+    z-index: 900; /* Abaixo da sidebar */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- Seções Padrão --- */
+.home-section, .cursos-section, .projetos-section {
+    padding-bottom: 60px; /* Espaço antes do rodapé */
+}
+
+/* --- Home Section --- */
+.hero {
+    text-align: center;
+    padding: 40px 0 60px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--cor-borda); /* Separador sutil */
+}
+
+.hero h1 {
+    font-size: 3.8em;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.4em;
+    max-width: 800px;
+    margin: 0 auto;
+    font-weight: 300;
+    color: rgba(240, 240, 240, 0.8);
+}
+
+.about-me {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.profile-pic {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--cor-secundaria);
+    box-shadow: 0 0 15px rgba(0, 200, 150, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.profile-pic:hover {
+    transform: scale(1.05);
+}
+
+.about-me p {
+    max-width: 800px;
+    font-size: 1.15em;
+    line-height: 1.8;
+    color: rgba(240, 240, 240, 0.9);
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.skills span {
+    background-color: var(--cor-card-fundo);
+    color: var(--cor-secundaria);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 0.95em;
+    border: 1px solid var(--cor-secundaria);
+}
+
+/* --- Learning Journey Section --- */
+.learning-journey {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.learning-journey h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+}
+
+.learning-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.learning-item {
+    background-color: var(--cor-card-fundo);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.learning-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+.learning-item img {
+    max-width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.learning-item h3 {
+    font-size: 1.4em;
+    color: var(--cor-secundaria);
+    margin-bottom: 10px;
+}
+
+.learning-item p {
+    font-size: 0.95em;
+    color: rgba(240, 240, 240, 0.9);
+}
+
+
+/* --- Grid de Cursos e Projetos (Cards) --- */
+.cursos-section h2, .projetos-section h2 {
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 50px;
+}
+
+.cursos-grid, .projetos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.projeto-card, .curso-card {
+    background-color: var(--cor-card-fundo);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 200, 150, 0.2);
+}
+
+.projeto-card:hover, .curso-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+.projeto-card img, .curso-card img {
+    max-width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    border: 2px solid var(--cor-secundaria);
+}
+
+.projeto-card h3, .curso-card h3 {
+    color: var(--cor-secundaria);
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.curso-card .instituicao {
+    font-size: 0.9em;
+    color: rgba(240, 240, 240, 0.7);
+    margin-bottom: 10px;
+}
+
+.projeto-card p, .curso-card p {
+    font-size: 1em;
+    color: rgba(240, 240, 240, 0.9);
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+.tecnologias {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.tecnologias span {
+    background-color: var(--cor-principal);
+    color: var(--cor-secundaria);
+    padding: 6px 14px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    border: 1px solid var(--cor-secundaria);
+    font-weight: 500;
+}
+
+.card-links {
+    margin-top: auto;
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    justify-content: center;
+}
+
+.card-links a {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-principal);
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.card-links a:hover {
+    background-color: var(--cor-principal);
+    color: var(--cor-secundaria);
+    border-color: var(--cor-secundaria);
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--cor-borda);
+    color: var(--cor-texto-claro);
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Responsividade (Off-Canvas) --- */
+@media (max-width: 768px) {
+    /* Esconde a sidebar no desktop e posiciona-a off-canvas para mobile */
+    .sidebar {
+        position: fixed;
+        left: -280px; /* Esconde a sidebar fora da tela */
+        top: 0;
+        height: 100%;
+        box-shadow: none; /* Remove a sombra quando escondida */
+        /* Flexbox original para vertical */
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        transition: left 0.3s ease-in-out; /* Animação para deslizar */
+        padding-top: 80px; /* Espaço para o botão de fechar ou logo superior */
+        /* Garante que o conteúdo dentro da sidebar possa rolar se for muito longo */
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* Melhora o scroll em iOS */
+    }
+
+    .sidebar .logo {
+        margin-bottom: 50px; /* Volta a margem inferior para vertical */
+        font-size: 2em; /* Ajusta o tamanho do logo */
+    }
+
+    .sidebar nav ul {
+        justify-content: center; /* Centraliza os itens do menu verticalmente */
+        flex-direction: column; /* Volta para vertical */
+        align-items: center;
+    }
+
+    .sidebar nav ul li {
+        margin: 15px 0; /* Espaçamento vertical entre os itens do menu */
+    }
+    .sidebar nav ul li a {
+        text-align: center;
+    }
+
+    /* Mostra a sidebar quando ativa */
+    .sidebar.is-active {
+        left: 0; /* Desliza para a tela */
+    }
+
+    /* Oculta o rodapé da sidebar em mobile, já que é um menu temporário */
+    .sidebar-footer {
+        display: none;
+    }
+
+    .content {
+        margin-left: 0; /* Conteúdo sempre ocupa a largura total */
+        padding: 20px; /* Padding ajustado */
+        width: 100%; /* Garante que o conteúdo ocupe a largura total */
+    }
+
+    /* Mostra o cabeçalho mobile */
+    .mobile-header {
+        display: flex; /* Transforma em flex para alinhar hambúrguer e título */
+    }
+    
+    /* Quando a sidebar está ativa, empurra o site-wrapper */
+    .site-wrapper.sidebar-open {
+        transform: translateX(280px); /* Empurra o conteúdo para a direita para revelar a sidebar */
+    }
+
+    /* Previne scroll no body quando o menu está aberto */
+    body.no-scroll {
+        overflow: hidden;
+    }
+
+    /* Ajustes para textos e elementos gerais em telas intermediárias */
+    .hero h1 { font-size: 2.8em; }
+    .hero p { font-size: 1.1em; }
+    .about-me p { font-size: 1em; }
+    .learning-journey h2, .cursos-section h2, .projetos-section h2 { font-size: 2.2em; }
+    .projetos-grid, .cursos-grid { grid-template-columns: 1fr; }
+    .currency-converter { flex-direction: column; gap: 20px; }
+    .currency-select { width: 90%; max-width: 300px; }
+}
+
+/* Ajustes para telas MUITO pequenas (celulares menores) */
+@media (max-width: 576px) {
+    .mobile-header .page-title {
+        font-size: 1.5em;
+    }
+    .hero h1 { font-size: 2em; }
+    .hero p { font-size: 0.95em; }
+    .profile-pic { width: 120px; height: 120px; }
+    .skills span { font-size: 0.8em; padding: 8px 15px; }
+    .learning-item img { width: 60px; height: 60px; }
+    .learning-item h3 { font-size: 1.2em; }
+    .sidebar nav ul li a { font-size: 1em; }
+    .sidebar .logo { font-size: 1.8em; }
+    /* No off-canvas, o sidebar-footer já está display: none */
+    .projeto-card h3, .curso-card h3 { font-size: 1.5em; }
+    .card-links a { padding: 10px 18px; font-size: 0.9em; }
+}
