@@ -23,17 +23,36 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburgerBtn.addEventListener('click', toggleMenu);
         overlay.addEventListener('click', toggleMenu);
 
+        // Fecha o menu se um link na sidebar for clicado
         const navLinks = sidebar.querySelectorAll('nav ul li a');
         navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (sidebar.classList.contains('is-active')) {
-                    toggleMenu();
+            link.addEventListener('click', (e) => {
+                const linkHref = link.getAttribute('href');
+                const currentPath = window.location.pathname.split('/').pop();
+
+                // Se o link é para a mesma página, para uma âncora, ou para 'projetos.html' estando em 'api-cotacao.html'
+                if (linkHref === currentPath ||
+                    (currentPath === '' && linkHref === 'index.html') ||
+                    (currentPath === 'api-cotacao.html' && linkHref === 'projetos.html') ||
+                    linkHref.startsWith('#')) {
+                    
+                    if (sidebar.classList.contains('is-active')) {
+                        toggleMenu(); // Apenas fecha o menu
+                        if (linkHref.startsWith('#')) {
+                            e.preventDefault(); // Previne o salto para âncoras
+                        }
+                    }
+                } else {
+                    // Se o link é para OUTRA página
+                    if (sidebar.classList.contains('is-active')) {
+                        toggleMenu(); // Fecha o menu e permite a navegação normal
+                    }
                 }
             });
         });
     } else {
         console.warn("api-cotacao-script.js: Um ou mais elementos do menu Off-Canvas não foram encontrados. O menu pode não funcionar.");
-        console.log({ hamburgerBtn, sidebar, overlay, siteWrapper }); // Mostra qual elemento pode estar faltando
+        console.log({ hamburgerBtn, sidebar, overlay, siteWrapper });
     }
 
     // --- Lógica Específica da Demonstração da API de Cotação ---
@@ -74,5 +93,5 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     getCotacaoBtn.addEventListener('click', fetchCotacao);
-    fetchCotacao(); // Carrega uma cotação inicial ao carregar a página
+    fetchCotacao();
 });

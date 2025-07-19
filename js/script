@@ -6,9 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         navLinks.forEach(link => {
             const linkPath = link.getAttribute('href').split('/').pop();
-            // Adiciona um tratamento para a página inicial (index.html ou path vazio)
-            // E também para a página de detalhes da API
-            if (linkPath === currentPath || (currentPath === '' && linkPath === 'index.html') || (currentPath === 'api-cotacao.html' && linkPath === 'projetos.html')) {
+            // Lógica para marcar o link ativo na sidebar
+            if (linkPath === currentPath ||
+                (currentPath === '' && linkPath === 'index.html') ||
+                // Se a página atual é 'api-cotacao.html', destaque 'projetos.html'
+                (currentPath === 'api-cotacao.html' && linkPath === 'projetos.html')
+            ) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
@@ -16,69 +19,79 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    highlightActiveLink(); // Chama a função ao carregar a página
+    highlightActiveLink();
 
     // --- Lógica do Menu Off-Canvas (Hambúrguer) ---
-    // Pega as referências dos elementos HTML que controlam o menu
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
     const siteWrapper = document.querySelector('.site-wrapper');
 
-    // Verifica se todos os elementos necessários para o menu foram encontrados
     if (hamburgerBtn && sidebar && overlay && siteWrapper) {
         console.log("script.js: Elementos do menu Off-Canvas encontrados. Inicializando.");
 
-        // Função que alterna o estado do menu (abre/fecha)
         const toggleMenu = () => {
-            sidebar.classList.toggle('is-active'); // Controla a posição da sidebar via CSS
-            hamburgerBtn.classList.toggle('is-active'); // Anima o ícone do hambúrguer
-            overlay.classList.toggle('is-active'); // Mostra/esconde o overlay
-            siteWrapper.classList.toggle('sidebar-open'); // Empurra o conteúdo principal
-            document.body.classList.toggle('no-scroll'); // Previne o scroll da página de fundo
+            sidebar.classList.toggle('is-active');
+            hamburgerBtn.classList.toggle('is-active');
+            overlay.classList.toggle('is-active');
+            //siteWrapper.classList.toggle('sidebar-open');
+            document.body.classList.toggle('no-scroll');
             console.log("script.js: Menu toggled.");
         };
 
-        // Adiciona os ouvintes de evento para o clique
-        hamburgerBtn.addEventListener('click', toggleMenu); // Abre/fecha ao clicar no hambúrguer
-        overlay.addEventListener('click', toggleMenu); // Fecha ao clicar no overlay escuro
+        hamburgerBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
 
         // Fecha o menu se um link na sidebar for clicado
         const navLinks = sidebar.querySelectorAll('nav ul li a');
         navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (sidebar.classList.contains('is-active')) {
-                    toggleMenu(); // Fecha o menu para que o usuário veja a página navegada
+            link.addEventListener('click', (e) => {
+                const linkHref = link.getAttribute('href');
+                const currentPath = window.location.pathname.split('/').pop();
+
+                // Se o link é para a mesma página, para uma âncora, ou para 'projetos.html' estando em 'api-cotacao.html'
+                if (linkHref === currentPath ||
+                    (currentPath === '' && linkHref === 'index.html') ||
+                    (currentPath === 'api-cotacao.html' && linkHref === 'projetos.html') ||
+                    linkHref.startsWith('#')) {
+                    
+                    if (sidebar.classList.contains('is-active')) {
+                        toggleMenu(); // Apenas fecha o menu
+                        if (linkHref.startsWith('#')) {
+                            e.preventDefault(); // Previne o salto para âncoras (para possível scroll suave)
+                        }
+                    }
+                } else {
+                    // Se o link é para OUTRA página
+                    if (sidebar.classList.contains('is-active')) {
+                        toggleMenu(); // Fecha o menu e permite a navegação normal
+                    }
                 }
             });
         });
     } else {
         console.warn("script.js: Um ou mais elementos do menu Off-Canvas não foram encontrados. O menu pode não funcionar.");
-        console.log({ hamburgerBtn, sidebar, overlay, siteWrapper }); // Mostra qual elemento pode estar faltando
+        console.log({ hamburgerBtn, sidebar, overlay, siteWrapper });
     }
 
     // --- Lógica de Animações de "Aparecer ao Rolar" ---
     const observerOptions = {
-        root: null, // O viewport (janela de visualização) é o elemento raiz
-        rootMargin: '0px', // Nenhuma margem extra
-        threshold: 0.1 // O callback será executado quando 10% do elemento estiver visível
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Se o elemento está visível, adiciona a classe para animar
                 entry.target.classList.add('animated-fade-in-up');
-                // Para de observar o elemento para que a animação ocorra apenas uma vez
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Seleciona os elementos que terão a animação ao rolar
-    // A classe 'animate-on-scroll' é adicionada no CSS para os estilos iniciais (opacity: 0, transform: translateY)
     document.querySelectorAll('.hero, .about-me, .learning-journey, .learning-item, .projeto-card, .curso-card').forEach(el => {
         el.classList.add('animate-on-scroll');
-        observer.observe(el); // Começa a observar cada elemento
+        observer.observe(el);
     });
 });
