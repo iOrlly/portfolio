@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sidebar.classList.toggle('is-active');
             hamburgerBtn.classList.toggle('is-active');
             overlay.classList.toggle('is-active');
-            siteWrapper.classList.toggle('sidebar-open');
+            //siteWrapper.classList.toggle('sidebar-open');
             document.body.classList.toggle('no-scroll');
             console.log("api-cotacao-script.js: Menu toggled.");
         };

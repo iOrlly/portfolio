@@ -33,7 +33,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- Novo: Site Wrapper para Gerenciar Layout --- */
 .site-wrapper {
-    display: flex; /* Para posicionar sidebar e conteúdo lado a lado no desktop */
+    display: flex; 
     min-height: 100vh;
     transition: transform 0.3s ease-in-out; /* Para animação de empurrar o conteúdo */
 }
@@ -94,7 +94,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sidebar-footer {
-    margin-top: 150%;
+    margin-top: 3cm;
     padding-top: 30px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     width: 100%;
@@ -435,7 +435,6 @@ h1, h2, h3, h4, h5, h6 {
     border-color: var(--cor-secundaria);
 }
 
-/* --- Footer --- */
 footer {
     background-color: var(--cor-borda);
     color: var(--cor-texto-claro);
@@ -447,27 +446,24 @@ footer {
 
 /* --- Responsividade (Off-Canvas) --- */
 @media (max-width: 768px) {
-    /* Esconde a sidebar no desktop e posiciona-a off-canvas para mobile */
     .sidebar {
         position: fixed;
-        left: -280px; /* Esconde a sidebar fora da tela */
+        left: -300px; /* Esconde a sidebar fora da tela */
         top: 0;
         height: 100%;
-        box-shadow: none; /* Remove a sombra quando escondida */
-        /* Flexbox original para vertical */
+        /*box-shadow: none; /* Remove a sombra quando escondida */
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
         transition: left 0.3s ease-in-out; /* Animação para deslizar */
         padding-top: 80px; /* Espaço para o botão de fechar ou logo superior */
-        /* Garante que o conteúdo dentro da sidebar possa rolar se for muito longo */
         overflow-y: auto;
         -webkit-overflow-scrolling: touch; /* Melhora o scroll em iOS */
     }
 
     .sidebar .logo {
-        margin-bottom: 50px; /* Volta a margem inferior para vertical */
-        font-size: 2em; /* Ajusta o tamanho do logo */
+        margin-bottom: 50px;
+        font-size: 2em;
     }
 
     .sidebar nav ul {
@@ -483,30 +479,30 @@ footer {
         text-align: center;
     }
 
-    /* Mostra a sidebar quando ativa */
+    /* Mostra a sidebar quando ativa o menu humbuguer*/
     .sidebar.is-active {
-        left: 0; /* Desliza para a tela */
+        left: 0;
     }
 
     /* Oculta o rodapé da sidebar em mobile, já que é um menu temporário */
     .sidebar-footer {
-        display: none;
+       display: 3cm;
     }
-
+/*ajusta o tamanho do cabeçalho*/
     .content {
-        margin-left: 0; /* Conteúdo sempre ocupa a largura total */
-        padding: 20px; /* Padding ajustado */
-        width: 100%; /* Garante que o conteúdo ocupe a largura total */
+        margin-left: 0;
+        padding: 20px;
+        width: 100%;
     }
 
     /* Mostra o cabeçalho mobile */
     .mobile-header {
-        display: flex; /* Transforma em flex para alinhar hambúrguer e título */
+        display: flex;
     }
     
-    /* Quando a sidebar está ativa, empurra o site-wrapper */
+    /* Empurra o conteúdo para a direita para revelar a sidebar */
     .site-wrapper.sidebar-open {
-        transform: translateX(280px); /* Empurra o conteúdo para a direita para revelar a sidebar */
+        transform: translateX(280px);
     }
 
     /* Previne scroll no body quando o menu está aberto */
@@ -537,7 +533,6 @@ footer {
     .learning-item h3 { font-size: 1.2em; }
     .sidebar nav ul li a { font-size: 1em; }
     .sidebar .logo { font-size: 1.8em; }
-    /* No off-canvas, o sidebar-footer já está display: none */
     .projeto-card h3, .curso-card h3 { font-size: 1.5em; }
     .card-links a { padding: 10px 18px; font-size: 0.9em; }
 }
