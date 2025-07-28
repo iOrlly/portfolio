@@ -42,7 +42,6 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar {
     width: 280px;
     background-color: var(--cor-borda);
-    padding: 30px 20px;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
@@ -451,7 +450,6 @@ footer {
         left: -300px; /* Esconde a sidebar fora da tela */
         top: 0;
         height: 100%;
-        /*box-shadow: none; /* Remove a sombra quando escondida */
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;

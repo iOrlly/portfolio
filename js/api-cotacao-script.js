@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sidebar.classList.toggle('is-active');
             hamburgerBtn.classList.toggle('is-active');
             overlay.classList.toggle('is-active');
-            //siteWrapper.classList.toggle('sidebar-open');
+            siteWrapper.classList.toggle('sidebar-open');
             document.body.classList.toggle('no-scroll');
             console.log("api-cotacao-script.js: Menu toggled.");
         };
@@ -76,9 +76,21 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(url);
             if (!response.ok) {
-                throw new Error(`Erro ao buscar cotação: ${response.status} ${response.statusText}`);
+                // Tenta ler a mensagem de erro da API se disponível
+                const errorData = await response.json().catch(() => ({}));
+                const errorMessage = errorData.detail || `Erro HTTP! Status: ${response.status} ${response.statusText}`;
+                throw new Error(errorMessage);
             }
             const data = await response.json();
+
+            // Verifica se a API externa retornou erro dentro do JSON (como ExchangeRate-API faz)
+            if (data.result === "error") {
+                throw new Error(`Erro da API externa: ${data["error-type"] || "Tipo de erro desconhecido"}`);
+            }
+            if (data.valor_cotacao === undefined || data.data_hora === undefined) {
+                throw new Error("Resposta da API inválida: valor_cotacao ou data_hora ausentes.");
+            }
+
 
             cotacaoValorSpan.textContent = data.valor_cotacao ? data.valor_cotacao.toFixed(4) : 'N/A';
             ultimaAtualizacaoSpan.textContent = data.data_hora || 'N/A';
@@ -87,11 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Erro na requisição da API:', error);
             cotacaoValorSpan.textContent = 'Erro!';
-            ultimaAtualizacaoSpan.textContent = 'Verifique o console para detalhes.';
+            ultimaAtualizacaoSpan.textContent = `Problema: ${error.message || "Verifique o console para detalhes."}`;
             jsonResponseCode.textContent = JSON.stringify({ error: error.message || "Erro desconhecido" }, null, 4);
         }
     };
 
     getCotacaoBtn.addEventListener('click', fetchCotacao);
-    fetchCotacao();
-});
+    fetchCotacao(); // Carrega uma cotação inicial ao carregar a página
+})
