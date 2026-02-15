@@ -1,4 +1,4 @@
-import { Section } from './assets/components/section'
+import { Section } from './assets/components/section2'
 function App() {
 
   return (
