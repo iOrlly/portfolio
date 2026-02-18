@@ -1,4 +1,4 @@
-export function DivHero() {
+export function Hero() {
     return(
         <>
             <div className="hero">

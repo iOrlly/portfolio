@@ -1,4 +1,4 @@
-export function DivAbout() {
+export function AboutMe() {
     return(
         <>
             <div className="about-me">
