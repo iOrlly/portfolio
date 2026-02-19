@@ -1,3 +1,5 @@
+import '../compo-css/footer.css';
+
 export function Footer() {
     return(
         <>
