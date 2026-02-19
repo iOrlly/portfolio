@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Home } from './assets/pages/home'
-import { Footer } from './assets/componentsHome/footer/footer'
+import { Home } from './pages/home'
+import { Footer } from './componentsHome/footer/footer'
 function App() {
     return(
         <BrowserRouter>
