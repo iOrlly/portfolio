@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Home } from './assets/pages/home'
-import { Footer } from './assets/components/footer'
+import { Footer } from './assets/componentsHome/footer/footer'
 function App() {
     return(
         <BrowserRouter>
@@ -11,4 +11,5 @@ function App() {
         </BrowserRouter>
     );
 }
-export default App
+
+export default App;
