@@ -1,0 +1,13 @@
+/*gerenciar o layout da página ao clicar no menu*/
+.site-wrapper{
+    display: flex;
+    min-height: 100vh;
+    transition: transform 0.3s ease-in-out;
+}
+
+@media (max-width: 768px){
+    /*Empurra o conteúdo para a direita para revelar o sidebar*/
+    .site-wrapper.sidebar-open{
+        transform: translateX(280px);
+    }
+}

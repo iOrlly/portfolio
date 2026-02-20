@@ -1,0 +1,46 @@
+/*Menu lateral desktop*/
+sidebar{
+    width:280px;
+    background-color: var(--cor-borda);
+    padding: 30px 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    display: flax;
+    flex-direction: columm;
+    align-items: center;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+sidebar .logo{
+    color: var(--cor-secundaria);
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-decoration: none;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sidebar nav ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar nav ul li{
+    margin-bottom:30px;
+}
+
+.sidebar nav ul li a{
+    color: var(--cor-text-claro);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.3rem;
+    padding: 12px 15px;
+    display: block;
+    border-radius: 8px;
+    transition: background-color 0.3 ease, color 0.3 ease, transform 0.2 ease;
+}
