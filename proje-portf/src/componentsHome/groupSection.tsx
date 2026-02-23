@@ -1,13 +1,17 @@
 import { AboutMe } from './aboutMe';
+import { Header } from './header';
 import { Journey } from './journey';
 
 export function GroupSection() {
     return(
         <>
-            <section className="home-section container">
-                <AboutMe />
-                <Journey />
-            </section>
+            <main className="content">
+                <Header />
+                <section className="home-section container">
+                    <AboutMe />
+                    <Journey />
+                </section>
+            </main>
         </>
     );
 }

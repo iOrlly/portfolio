@@ -44,3 +44,33 @@ sidebar .logo{
     border-radius: 8px;
     transition: background-color 0.3 ease, color 0.3 ease, transform 0.2 ease;
 }
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active{
+    background-color: var(--cor-secundaria);
+    color: var(--cor-principal);
+    transform: translateX(10px);
+}
+
+.sidebar-footer{
+    margin-top: 3cm;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0);
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.sidebar-footer a{
+    color: var(--cor-text-claro);
+    font-size: 1.1em;
+    text-decoration: none;
+    trasintion: color 0.3s ease;
+}
+
+.sidebar-footer a:hover{
+    color: var(--cor-secundaria);
+}
+

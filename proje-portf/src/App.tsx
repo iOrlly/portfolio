@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Home } from './pages/home'
+import { Home } from './pages/home/home'
 import { Footer } from './componentsHome/footer/footer'
 function App() {
     return(

@@ -1,6 +1,6 @@
-import { Collapsible } from '../componentsHome/collapsible/collapsible'
-import { Header } from '../componentsHome/header'
-import { GroupSection } from '../componentsHome/groupSection'
+import { Collapsible } from '../../componentsHome/collapsible/collapsible'
+import { Header } from '../../componentsHome/header'
+import { GroupSection } from '../../componentsHome/groupSection'
 import '../componentsHome/siteWrapper.css'
 
 
