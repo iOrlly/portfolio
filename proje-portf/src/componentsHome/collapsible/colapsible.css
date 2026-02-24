@@ -67,7 +67,7 @@ sidebar .logo{
     color: var(--cor-text-claro);
     font-size: 1.1em;
     text-decoration: none;
-    trasintion: color 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 .sidebar-footer a:hover{

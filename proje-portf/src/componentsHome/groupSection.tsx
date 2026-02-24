@@ -1,4 +1,4 @@
-import { AboutMe } from './aboutMe';
+import { AboutMe } from './aboutMe/aboutMe';
 import { Header } from './header';
 import { Journey } from './journey';
 

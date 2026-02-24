@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.hero, .about-me, .leaning-journey, .learning-item, .projeto-card, .curso-card'). forEach(el => {
+    document.querySelectorAll('.hero, .about-me, .leaning-journey, .learning-item, .projeto-card, .curso-card').forEach(el => {
         el.classList.add('animated-on-scroll');
         observer.observe(el);
     })

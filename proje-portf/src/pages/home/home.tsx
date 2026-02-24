@@ -1,7 +1,7 @@
 import { Collapsible } from '../../componentsHome/collapsible/collapsible'
-import { Header } from '../../componentsHome/header'
 import { GroupSection } from '../../componentsHome/groupSection'
-import '../componentsHome/siteWrapper.css'
+import '../../componentsHome/siteWrapper.css'
+import './home.ts'
 
 
 export function Home() {
@@ -9,7 +9,6 @@ export function Home() {
         <>
             <div className="site-wrapper">
                 <Collapsible />
-                <Header />
                 <GroupSection />
             </div>
         </>
