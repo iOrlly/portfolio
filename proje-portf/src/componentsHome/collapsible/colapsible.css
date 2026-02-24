@@ -1,5 +1,5 @@
 /*Menu lateral desktop*/
-sidebar{
+.sidebar{
     width:280px;
     background-color: var(--cor-borda);
     padding: 30px 20px;
@@ -13,7 +13,7 @@ sidebar{
     z-index: 1000;
 }
 
-sidebar .logo{
+.sidebar .logo{
     color: var(--cor-secundaria);
     font-size: 2.2rem;
     font-weight: 700;
@@ -73,4 +73,55 @@ sidebar .logo{
 .sidebar-footer a:hover{
     color: var(--cor-secundaria);
 }
+ /*------telas média----------*/
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: -300px;
+        top: 0;
+        height: 100%;
+        /*border-shadow: none /*remove sombra quando escondida*/
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        transition: left 0.3s ease-in-out;
+        padding-top: 80px;
+        overflow: auto;
+        /*-webkit-overflow-scrolling: touch;*/
+    }
 
+    .sidebar .logo {
+        margin-bottom: 50px;
+        font-size: 2em;;
+    }
+
+    .sidebar nav ul {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sidebar nav ul li {
+        margin: 15px 0;
+    }
+
+    .sidebar nav ul li a {
+        text-align: center;
+    }
+
+    /*Mostra a sidebar quando ativar o menu hamburger*/
+    .sidebar.is-active {
+        left: 0;
+    }
+
+    /*oculta o rodapé da sidebar no mobile*/
+    .sidebar-footer{
+        display: 3cm;
+    }
+}
+
+/*------telas muito pequena------------*/
+@media (max-width: 576px) {
+    .sidebar nav ul li a {font-size: 1em; }
+    .sidebar .logo {font-size: 1.8em; }
+}
