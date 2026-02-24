@@ -1,6 +1,6 @@
 import { AboutMe } from './aboutMe/aboutMe';
-import { Header } from './header';
-import { Journey } from './journey';
+import { Header } from './header/header.tsx';
+import { Journey } from './journey/journey.tsx';
 
 export function GroupSection() {
     return(
