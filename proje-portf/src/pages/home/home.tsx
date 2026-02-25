@@ -1,5 +1,5 @@
-import { Collapsible } from '../../componentsHome/collapsible/collapsible'
-import { GroupSection } from '../../componentsHome/groupSection'
+import { Collapsible } from '../../componentsHome/collapsible/collapsible.tsx'
+import { GroupSection } from '../../componentsHome/groupSection/groupSection.tsx'
 import '../../componentsHome/siteWrapper.css'
 import './home.ts'
 
