@@ -1,0 +1,82 @@
+.hero {
+    text-align: center;
+    padding: 40px 0 60px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.hero h1 {
+    font-size: 3.8em;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.4em;
+    max-width: 800px;
+    margin: 0 auto;
+    font-weight: 300;
+    color: rgba(240, 240, 240, 0.8);
+}
+
+.about-me {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.profile-pic {
+    width: 180px;
+    height: 180px;
+    border-radius: 50px;
+    object-fit: cover;
+    border: 5px solid var(--cor-secundaria);
+    box-shadow: 0 0 15px rgba(0, 200, 150, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.profile-pic:hover {
+    transform: scale(1.05);
+}
+
+.about-me p {
+    max-width: 800px;
+    font-size: 1.15em;
+    line-height: 1.8;
+    color: rgba(240, 240, 240, 0.9)
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.skills span {
+    background-color: var(--cor-card-fundo);
+    color: var(--cor-secundaria);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 500;
+    border: 1px solid var(--cor-secundaria);
+}
+
+/*-----------Para ajustes em telas intemediárias------------*/
+@media (max-width: 768px) {
+    .hero h1 {font-size: 2.8em; }
+    .hero p {font-size: 1.1em; }
+    .about-me p {font-size: 1em; }
+}
+
+/*------------Ajustes em telas muito pequenas------------*/
+@media (max-width: 576px) {
+    .hero h1 {font-size: 2em; }
+    .hero p {font-size: 0.95em; }
+    .profile-pic {width: 120px; height: 120px; }
+    .skills span { font-size: 0.8em; padding: 8px 15px;}
+}

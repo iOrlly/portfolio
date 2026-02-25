@@ -1,0 +1,57 @@
+.learning-journey {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.learning-journey h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+}
+
+.learning-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.learning-item {
+    background-color: var(--cor-card-fundo);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.learning-item:hover {
+    transform: translateX(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+.learning-item img {
+    max-width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.learning-item h3 {
+    font-size: 1.4em;
+    color: var(--cor-secundaria);
+    margin-bottom: 10px;
+}
+
+.learning-item p {
+    font-size: 0.95em;
+    color: rgba(240, 240, 240, 0.9);
+}
+
+@media (max-width: 768px) {
+    .learning-journey h2, .cursos.section h2, .projetos-section h2 { font-size: 2.2em; }
+}
+
+@media (max-width: 576px) {
+    .learning-item img { width: 60px; height: 60px; }
+    .learning-item h3 { font-size: 1.2em; }
+}
