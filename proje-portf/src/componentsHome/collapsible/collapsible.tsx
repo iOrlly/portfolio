@@ -13,7 +13,7 @@ export function Collapsible() {
                     </ul>
                 </nav>
                 <div className="sidebar-footer">
-                    <a href="//www.linkedin.com/in/júlio-o-rly-491845289/" target="_blank">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/júlio-silva-491845289/" target="_blank">LinkedIn</a>
                     <a href="https://github.com/iOrlly" target="_blank">GitHub</a>
                 </div>
             </aside>
